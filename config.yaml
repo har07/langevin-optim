@@ -94,6 +94,7 @@ asgld.ASGLD:
   eps: 5.e-5
   noise: 2.e-2
 dataset:
+  name: CIFAR10 # MNIST|CIFAR10
   train_batch: 200
   test_batch: 200
 percentage_tosample: .1

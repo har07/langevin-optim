@@ -9,6 +9,27 @@ opener.addheaders = [('User-agent', 'Mozilla/5.0')]
 urllib.request.install_opener(opener)
 # end workaround
 
+def make_datasets_cifar10(bs=50, test_bs=4096):
+    transform = transforms.Compose(
+        [transforms.ToTensor(),
+        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+
+    train_loader = torch.utils.data.DataLoader(
+        datasets.CIFAR10('data',
+            train=True,
+            download=True,
+            transform=transform),
+        batch_size=bs,
+        shuffle=True)
+
+    test_loader = torch.utils.data.DataLoader(
+        datasets.CIFAR10('data',
+            train=False,
+            transform=transform),
+        batch_size=test_bs)
+
+    return train_loader, test_loader
+
 def make_datasets(bs=50, test_bs=4096, noise=0):
     train_loader = torch.utils.data.DataLoader(
         datasets.MNIST('data',

@@ -63,6 +63,9 @@ step_samples = config['step_samples']
 step_save_state = config['step_save_state']
 
 dataset_params = config['dataset']
+dataset_name = dataset_params['name']
+if dataset_name not in ['MNIST','CIFAR10']:
+    raise NotImplementedError
 train_batch = dataset_params['train_batch']
 test_batch = dataset_params['test_batch']
 
@@ -70,8 +73,14 @@ torch.cuda.set_device(0)
 torch.manual_seed(seed)
 random.seed(seed)
 np.random.seed(seed)
-model = lib.model.MnistModel()
-train_loader, test_loader = lib.dataset.make_datasets(bs=train_batch, test_bs=test_batch)
+
+if dataset_name == "MNIST":
+    model = lib.model.MnistModel()
+    train_loader, test_loader = lib.dataset.make_datasets(bs=train_batch, test_bs=test_batch)
+else:
+    model = lib.model.Cifar10Model()
+    train_loader, test_loader = lib.dataset.make_datasets_cifar10(bs=train_batch, test_bs=test_batch)
+    
 model = model.cuda()
 
 optim_params = {}
