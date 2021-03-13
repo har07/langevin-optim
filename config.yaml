@@ -1,10 +1,10 @@
 seed: 1
-epoch: 10
+epoch: 5
 block_size: 5
 block_decay: .5
 preconditioner: None
-optimizer: psgld2.pSGLD
-accept_model: False
+optimizer: eksgld.EKSGLD
+accept_model: True
 ekfac.EKFAC:
   eps: 1.e-3
   sua: False
@@ -13,7 +13,7 @@ ekfac.EKFAC:
   alpha: .5
 eksgld.EKSGLD:
   lr: 5.e-3
-  train_size: 60000
+  train_size: 50000
   num_burn_in_steps: 600
   add_noise: True
   eps: 1.e-3   # Tikhonov regularization
@@ -24,6 +24,7 @@ eksgld.EKSGLD:
   update_style: ksgld
 ksgld.KSGLD:
   lr: 3.2e-2
+  train_size: 50000
   num_burn_in_steps: 600
   add_noise: True
   eps: 1.e-3   # Tikhonov regularization
@@ -61,7 +62,7 @@ sgld2.SGLD:
   num_burn_in_steps: 300
 sgld3.SGLD:
   lr: .1
-  train_size: 60000
+  train_size: 50000
   lr_decay: 2.e-2
   weight_decay: 0.
   num_burn_in_steps: 300
@@ -73,7 +74,7 @@ psgld.pSGLD:
   num_burn_in_steps: 300
 psgld2.pSGLD:
   lr: 1.e-3
-  train_size: 60000
+  train_size: 50000
   alpha: .95
   eps: 5.e-5
   num_burn_in_steps: 300

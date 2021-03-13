@@ -74,6 +74,9 @@ torch.manual_seed(seed)
 random.seed(seed)
 np.random.seed(seed)
 
+print('decay size: ', block_size, ', decay rate: ', block_decay)
+print('train batch size: ', train_batch, ', test batch size: ', test_batch)
+
 if dataset_name == "MNIST":
     model = lib.model.MnistModel()
     train_loader, test_loader = lib.dataset.make_datasets(bs=train_batch, test_bs=test_batch)
