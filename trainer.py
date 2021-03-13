@@ -32,7 +32,7 @@ from os import makedirs
 
 default_yaml =  "config.yaml"
 default_silent = False
-save_model_path = "/content/kfac-backpack"
+save_model_path = "/content/langevin-optim"
 session_id = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
 parser = argparse.ArgumentParser(
@@ -117,8 +117,8 @@ step = 0
 current_lr = optim_params["lr"]
 
 # check if optimizer.step has 'lr' param
-step_args = inspect.getfullargspec(optimizer.step)
-lr_param = 'lr' in step_args.args
+step_args = inspect.signature(optimizer.step)
+lr_param = 'lr' in step_args.parameters
 
 val_accuracy=0
 stdev_acc = []

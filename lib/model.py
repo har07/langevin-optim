@@ -24,7 +24,7 @@ class Cifar10Model(nn.Module):
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
         x = self.fc3(x)
-        return x
+        return F.log_softmax(x, dim=1)
 
 class MnistModel(nn.Module):
     def __init__(self, n_filters1=64,
